@@ -15,7 +15,7 @@ def sendMail(TO,
 
     sendmail_location = "/usr/sbin/sendmail" # sendmail location
     p = os.popen("%s -t" % sendmail_location, "w")
-    p.write("Return-Path: <sysadmin@schema31.it>")
+    p.write("Return-Path: <ilario@febi.biz>")
     p.write("From: %s\n" % FROMADDR)
     p.write("To: %s\n" % TO)
     p.write("Subject: %s\n" % SUBJECT)
@@ -116,7 +116,7 @@ def instrada(command):
         ROUTE.append('route del -host %s %s && route add -host %s %s' % (VOIP['ip'], ADSL['ip'], VOIP['ip'], HDSL['ip']))
         SEND['TO'] = ADMIN_EMAIL 
         SEND['SUBJECT'] = 'Autorouting => HDSL - %s' % LOC
-        CB_PROCEDURE = 'https://cb.schema31.it/cb/wiki/171638'
+        CB_PROCEDURE = 'http://wiki.febi.biz/171638'
         SEND['TEXT'] = 'ADSL di %s non funziona, provvedo a migrare tutto il traffico su HDSL'\
                        '\n\n Vai qui:\n %s\n Per la procedura di segnalazione ' % (LOC, CB_PROCEDURE)
         
@@ -127,7 +127,7 @@ def instrada(command):
         ROUTE.append('route del -host %s %s && route add -host %s %s' % (VOIP['ip'], HDSL['ip'], VOIP['ip'], ADSL['ip']))
         SEND['TO'] = ADMIN_EMAIL 
         SEND['SUBJECT'] = 'Autorouting => ADSL - %s' % LOC
-        CB_PROCEDURE = 'https://cb.schema31.it/cb/wiki/171639'
+        CB_PROCEDURE = 'http://wiki.febi.biz/171638'
         SEND['TEXT'] = 'HDSL di %s non funziona, provvedo a migrare tutto il traffico su ADSL'\
                        '\n\n Vai qui:\n %s\n Per la procedura di segnalazione ' % (LOC, CB_PROCEDURE)
 
@@ -153,7 +153,7 @@ def instrada(command):
             logging.warning(R)
             route_out = os.popen(R).readlines()
             logging.info(route_out)
-        sendMail(SEND['TO'], 'sysadmin@schema31.it', SEND['SUBJECT'], SEND['TEXT'])
+        sendMail(SEND['TO'], 'ilario@febi.biz', SEND['SUBJECT'], SEND['TEXT'])
         
 
 def inc_quality(v,q, ulimit=10, llimit=-10):
